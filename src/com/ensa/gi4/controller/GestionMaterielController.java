@@ -9,15 +9,17 @@ public class GestionMaterielController {
 
     private GestionMaterielService gestionMaterielService;
 
+    // injection par accessor
     public void setGestionMaterielService(GestionMaterielService gestionMaterielService) {
-        // injection par accesseur
         this.gestionMaterielService = gestionMaterielService;
     }
 
     public void afficherMenu() {
-        System.out.println("1- pour lister le materiel, entrer 1");
+        System.out.println("1- pour lister les materiels, entrer 1");
         System.out.println("2- pour ajouter un nouveau materiel, entrer 2");
         System.out.println("3- pour supprimer un materiel, entrer 3");
+        System.out.println("4- pour modifier un materiel, entrer 4");
+        System.out.println("5- pour chercher un materiel, entrer 5");
         System.out.println("0- pour sortir de l'application, entrer 0");
         Scanner scanner = new Scanner(System.in);
         String next = scanner.next();
@@ -29,6 +31,10 @@ public class GestionMaterielController {
             ajouterMateriel();
         } else if ("3".equals(next)) {
             supprimerMateriel();
+        } else if ("4".equals(next)) {
+            modifierMateriel();
+        } else if ("5".equals(next)) {
+            chercherMateriel();
         } else {
             System.out.println("choix invalide");
         }
@@ -46,20 +52,38 @@ public class GestionMaterielController {
         System.out.println("Pour ajouter un livre taper 1 : ");
         System.out.println("Pour ajouter une chaise taper 2 : ");
         Scanner scanner = new Scanner(System.in);
-        String next = scanner.next();
-        if ("1".equals(next)) {
-            gestionMaterielService.ajouterNouveauMateriel(new Livre(1, "Antigone"));
-        } else if ("2".equals(next)) {
-            gestionMaterielService.ajouterNouveauMateriel(new Chaise(2, "Chaise gamer"));
+        String choix = scanner.next();
+        System.out.print("ID : ");
+        int id = scanner.nextInt();
+        System.out.print("Nom : ");
+        String nom = scanner.next();
+        if ("1".equals(choix)) {
+            gestionMaterielService.ajouterNouveauMateriel(new Livre(id, nom));
+        } else if ("2".equals(choix)) {
+            gestionMaterielService.ajouterNouveauMateriel(new Chaise(id, nom));
         } else {
             System.out.println("choix invalide");
         }
     }
 
     public void supprimerMateriel() {
-        System.out.println("Entre un id : ");
+        System.out.print("Entre un id : ");
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
         gestionMaterielService.supprimerUnMateriel(id);
+    }
+
+    public void modifierMateriel() {
+        System.out.print("Entre un id : ");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        gestionMaterielService.modifierUnMateriel(id);
+    }
+
+    public void chercherMateriel() {
+        System.out.print("Entre un id : ");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        gestionMaterielService.chercherUnMateriel(id);
     }
 }

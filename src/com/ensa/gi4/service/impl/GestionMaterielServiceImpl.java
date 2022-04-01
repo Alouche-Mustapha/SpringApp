@@ -5,6 +5,7 @@ import com.ensa.gi4.modele.Materiel;
 import com.ensa.gi4.service.api.GestionMaterielService;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GestionMaterielServiceImpl implements GestionMaterielService {
     // bd goes here
@@ -13,13 +14,15 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
     private int nbrChaises = 0;
 
     @Override
-    public void init() {
-        System.out.println("inititialisation du service");
-    }
-
-    @Override
     public void listerMateriel() {
-        System.out.println("Liste de materiel :\n" + this.nbrLivres + " Livres \n" + this.nbrChaises + " chaises");
+        if (this.materiels.size() == 0) {
+            System.out.println("La liste est vide");
+        } else {
+            System.out.println("La liste des materiels :");
+            for (Materiel materiel: materiels) {
+                System.out.println("ID : " + materiel.getId() + " , Nom : " + materiel.getName());
+            }
+        }
     }
 
     @Override
@@ -30,7 +33,7 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
             this.nbrChaises++;
         }
         materiels.add(materiel);
-        System.out.println("L'ajout du materiel " + materiel.getName() + " effectue avec succes !");
+        System.out.println("Materiel bien ajouter");
     }
 
     @Override
@@ -44,6 +47,36 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
                 }
                 materiels.remove(materiels.get(i));
                 System.out.println("Materiel bien supprimer");
+                break;
+            }
+            if (i == materiels.size() - 1) {
+                System.out.println("Pas de materiel avec cet id");
+            }
+        }
+    }
+
+    @Override
+    public void chercherUnMateriel(int id) {
+        for (int i = 0; i < materiels.size(); i++) {
+            if (materiels.get(i).getId() == id) {
+                System.out.println("Le materiel " + materiels.get(i).getName() + " bien trouver");
+                break;
+            }
+            if (i == materiels.size() - 1) {
+                System.out.println("Pas de materiel avec cet id");
+            }
+        }
+    }
+
+    @Override
+    public void modifierUnMateriel(int id) {
+        for (int i = 0; i < materiels.size(); i++) {
+            if (materiels.get(i).getId() == id) {
+                System.out.print("Nom : ");
+                Scanner scanner = new Scanner(System.in);
+                String nom = scanner.next();
+                materiels.get(i).setName(nom);
+                System.out.println("Materiel bien modifier");
                 break;
             }
             if (i == materiels.size() - 1) {

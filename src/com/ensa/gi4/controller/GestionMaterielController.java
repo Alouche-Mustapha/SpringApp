@@ -1,6 +1,7 @@
 package com.ensa.gi4.controller;
 import com.ensa.gi4.modele.Chaise;
 import com.ensa.gi4.modele.Livre;
+import com.ensa.gi4.service.api.AllocationMaterielService;
 import com.ensa.gi4.service.api.GestionMaterielService;
 
 import java.util.Scanner;
@@ -8,10 +9,15 @@ import java.util.Scanner;
 public class GestionMaterielController {
 
     private GestionMaterielService gestionMaterielService;
+    private AllocationMaterielService allocationMaterielService;
 
     // injection par accessor
     public void setGestionMaterielService(GestionMaterielService gestionMaterielService) {
         this.gestionMaterielService = gestionMaterielService;
+    }
+
+    public void setAllocationMaterielService(AllocationMaterielService allocationMaterielService) {
+        this.allocationMaterielService = allocationMaterielService;
     }
 
     public void afficherMenu() {
@@ -20,6 +26,7 @@ public class GestionMaterielController {
         System.out.println("3- pour supprimer un materiel, entrer 3");
         System.out.println("4- pour modifier un materiel, entrer 4");
         System.out.println("5- pour chercher un materiel, entrer 5");
+        System.out.println("6- pour allouer un materiel, entrer 6");
         System.out.println("0- pour sortir de l'application, entrer 0");
         Scanner scanner = new Scanner(System.in);
         String next = scanner.next();
@@ -35,6 +42,8 @@ public class GestionMaterielController {
             modifierMateriel();
         } else if ("5".equals(next)) {
             chercherMateriel();
+        } else if ("6".equals(next)) {
+            allouerMateriel();
         } else {
             System.out.println("choix invalide");
         }
@@ -85,5 +94,9 @@ public class GestionMaterielController {
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
         gestionMaterielService.chercherUnMateriel(id);
+    }
+
+    public void allouerMateriel() {
+        allocationMaterielService.allouerMateriel();
     }
 }

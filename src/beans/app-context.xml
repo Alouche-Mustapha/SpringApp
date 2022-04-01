@@ -6,8 +6,11 @@
 
     <bean id="gestionMaterielService" class="com.ensa.gi4.service.impl.GestionMaterielServiceImpl"/>
 
+    <bean id="allocationMaterielService" class="com.ensa.gi4.service.impl.AllocationMaterielServiceImpl"/>
+
     <bean id="gestionMaterielController" class="com.ensa.gi4.controller.GestionMaterielController">
         <property name="gestionMaterielService" ref="gestionMaterielService"/>
+        <property name="allocationMaterielService" ref="allocationMaterielService"/>
     </bean>
 
 </beans>

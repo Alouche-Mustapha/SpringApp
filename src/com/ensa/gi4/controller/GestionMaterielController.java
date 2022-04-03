@@ -67,9 +67,13 @@ public class GestionMaterielController {
         System.out.print("Nom : ");
         String nom = scanner.next();
         if ("1".equals(choix)) {
-            gestionMaterielService.ajouterNouveauMateriel(new Livre(id, nom));
+            System.out.print("NbrPage : ");
+            int nbrPage = scanner.nextInt();
+            gestionMaterielService.ajouterNouveauMateriel(new Livre(id, nom, nbrPage));
         } else if ("2".equals(choix)) {
-            gestionMaterielService.ajouterNouveauMateriel(new Chaise(id, nom));
+            System.out.print("Marque : ");
+            String marque = scanner.next();
+            gestionMaterielService.ajouterNouveauMateriel(new Chaise(id, nom, marque));
         } else {
             System.out.println("choix invalide");
         }
@@ -79,21 +83,21 @@ public class GestionMaterielController {
         System.out.print("Entre un id : ");
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
-        gestionMaterielService.supprimerUnMateriel(id);
+        this.gestionMaterielService.supprimerUnMateriel(id);
     }
 
     public void modifierMateriel() {
         System.out.print("Entre un id : ");
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
-        gestionMaterielService.modifierUnMateriel(id);
+        this.gestionMaterielService.modifierUnMateriel(id);
     }
 
     public void chercherMateriel() {
         System.out.print("Entre un id : ");
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
-        gestionMaterielService.chercherUnMateriel(id);
+        this.gestionMaterielService.chercherUnMateriel(id);
     }
 
     public void allouerMateriel() {

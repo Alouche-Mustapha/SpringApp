@@ -1,6 +1,7 @@
 package com.ensa.gi4.controller;
 import com.ensa.gi4.modele.Chaise;
 import com.ensa.gi4.modele.Livre;
+import com.ensa.gi4.modele.Materiel;
 import com.ensa.gi4.service.api.AllocationMaterielService;
 import com.ensa.gi4.service.api.GestionMaterielService;
 
@@ -11,7 +12,6 @@ public class GestionMaterielController {
     private GestionMaterielService gestionMaterielService;
     private AllocationMaterielService allocationMaterielService;
 
-    // injection par accessor
     public void setGestionMaterielService(GestionMaterielService gestionMaterielService) {
         this.gestionMaterielService = gestionMaterielService;
     }
@@ -58,46 +58,28 @@ public class GestionMaterielController {
     }
 
     public void ajouterMateriel() {
-        System.out.println("Pour ajouter un livre taper 1 : ");
-        System.out.println("Pour ajouter une chaise taper 2 : ");
-        Scanner scanner = new Scanner(System.in);
-        String choix = scanner.next();
-        System.out.print("ID : ");
-        int id = scanner.nextInt();
-        System.out.print("Nom : ");
-        String nom = scanner.next();
-        if ("1".equals(choix)) {
-            System.out.print("NbrPage : ");
-            int nbrPage = scanner.nextInt();
-            gestionMaterielService.ajouterNouveauMateriel(new Livre(id, nom, nbrPage));
-        } else if ("2".equals(choix)) {
-            System.out.print("Marque : ");
-            String marque = scanner.next();
-            gestionMaterielService.ajouterNouveauMateriel(new Chaise(id, nom, marque));
-        } else {
-            System.out.println("choix invalide");
-        }
+        this.gestionMaterielService.ajouterMateriel();
     }
 
     public void supprimerMateriel() {
         System.out.print("Entre un id : ");
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
-        this.gestionMaterielService.supprimerUnMateriel(id);
+        this.gestionMaterielService.supprimerMateriel(id);
     }
 
     public void modifierMateriel() {
         System.out.print("Entre un id : ");
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
-        this.gestionMaterielService.modifierUnMateriel(id);
+        this.gestionMaterielService.modifierMateriel(id);
     }
 
     public void chercherMateriel() {
         System.out.print("Entre un id : ");
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
-        this.gestionMaterielService.chercherUnMateriel(id);
+        this.gestionMaterielService.chercherMateriel(id);
     }
 
     public void allouerMateriel() {

@@ -4,13 +4,23 @@
 		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-    <bean id="gestionMaterielDAO" class="com.ensa.gi4.datatabase.GestionMaterielDAO" factory-method="getInstance"/>
+    <bean id="materielDAO" class="com.ensa.gi4.datatabase.MaterielDAO"/>
 
-    <bean id="gestionMaterielService" class="com.ensa.gi4.service.impl.GestionMaterielServiceImpl">
-        <constructor-arg ref="gestionMaterielDAO"/>
+    <bean id="gestionChaiseService" class="com.ensa.gi4.service.impl.GestionChaiseServiceImpl">
+        <constructor-arg ref="materielDAO"/>
     </bean>
 
-    <bean id="allocationMaterielService" class="com.ensa.gi4.service.impl.AllocationMaterielServiceImpl" scope="prototype"/>
+    <bean id="gestionLivreService" class="com.ensa.gi4.service.impl.GestionLivreServiceImpl">
+        <constructor-arg ref="materielDAO"/>
+    </bean>
+
+    <bean id="gestionMaterielService" class="com.ensa.gi4.service.impl.GestionMaterielServiceImpl" scope="prototype">
+        <constructor-arg ref="materielDAO"/>
+        <constructor-arg ref="gestionChaiseService"/>
+        <constructor-arg ref="gestionLivreService"/>
+    </bean>
+
+    <bean id="allocationMaterielService" class="com.ensa.gi4.service.impl.AllocationMaterielServiceImpl"/>
 
     <bean id="gestionMaterielController" class="com.ensa.gi4.controller.GestionMaterielController">
         <property name="gestionMaterielService" ref="gestionMaterielService"/>

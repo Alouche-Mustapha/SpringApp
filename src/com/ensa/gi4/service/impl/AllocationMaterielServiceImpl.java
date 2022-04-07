@@ -23,7 +23,7 @@ public class AllocationMaterielServiceImpl implements AllocationMaterielService 
             System.out.println("Pas de materiel avec cet id");
         } else {
             this.materielDAO.allouerMateriel(materiel);
-            System.out.println("Materiel " + materiel.getName() + " est bien allouee");
+            System.out.println("Materiel " + materiel.getName() + " est bien alloue");
         }
     }
 
@@ -34,7 +34,7 @@ public class AllocationMaterielServiceImpl implements AllocationMaterielService 
             System.out.println("Pas de materiel avec cet id");
         } else {
             this.materielDAO.rendreMateriel(materiel);
-            System.out.println("Materiel " + materiel.getName() + " est bien rendue");
+            System.out.println("Materiel " + materiel.getName() + " est bien rendu");
         }
     }
 

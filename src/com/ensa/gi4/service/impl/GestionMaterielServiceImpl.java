@@ -73,7 +73,7 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
         if (materiel == null) {
             System.out.println("Pas de materiel avec cet id");
         } else {
-            System.out.println("Le materiel " + materiel + " est bien trouver");
+            System.out.println("Le materiel " + materiel + " est bien trouve");
         }
     }
 

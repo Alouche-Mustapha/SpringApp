@@ -22,15 +22,15 @@ public class GestionMaterielController {
 
     public void afficherMenu() {
         System.out.println("\n******************************************");
-        System.out.println("1- pour lister les materiels,    entrer 1");
-        System.out.println("2- pour lister les allocations,  entrer 2");
-        System.out.println("3- pour ajouter un materiel,     entrer 3");
-        System.out.println("4- pour supprimer un materiel,   entrer 4");
-        System.out.println("5- pour modifier un materiel,    entrer 5");
-        System.out.println("6- pour chercher un materiel,    entrer 6");
-        System.out.println("7- pour allouer un materiel,     entrer 7");
-        System.out.println("8- pour rendre un materiel,      entrer 8");
-        System.out.println("0- pour sortir de l'application, entrer 0");
+        System.out.println("1- pour lister les materiels    :  taper 1");
+        System.out.println("2- pour lister les allocations  :  taper 2");
+        System.out.println("3- pour ajouter un materiel     :  taper 3");
+        System.out.println("4- pour supprimer un materiel   :  taper 4");
+        System.out.println("5- pour modifier un materiel    :  taper 5");
+        System.out.println("6- pour chercher un materiel    :  taper 6");
+        System.out.println("7- pour allouer un materiel     :  taper 7");
+        System.out.println("8- pour rendre un materiel      :  taper 8");
+        System.out.println("0- pour sortir de l'application :  taper 0");
         System.out.println("******************************************\n");
         System.out.print("option : ");
         Scanner scanner = new Scanner(System.in);

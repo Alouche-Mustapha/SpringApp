@@ -15,11 +15,6 @@ public class GestionChaiseServiceImpl implements GestionChaiseService {
     }
 
     @Override
-    public void listerMateriel() {
-
-    }
-
-    @Override
     public void ajouterMateriel() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("ID : ");
@@ -33,16 +28,6 @@ public class GestionChaiseServiceImpl implements GestionChaiseService {
     }
 
     @Override
-    public void supprimerMateriel(int id) {
-
-    }
-
-    @Override
-    public void chercherMateriel(int id) {
-
-    }
-
-    @Override
     public void modifierMateriel(int id) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nom : ");
@@ -51,5 +36,20 @@ public class GestionChaiseServiceImpl implements GestionChaiseService {
         String marque = scanner.next();
         this.materielDAO.modifierMateriel(id, new Chaise(id, nom, marque));
         System.out.println("La chaise est bien modifiee");
+    }
+
+    @Override
+    public void listerMateriel() {
+
+    }
+
+    @Override
+    public void supprimerMateriel(int id) {
+
+    }
+
+    @Override
+    public void chercherMateriel(int id) {
+
     }
 }

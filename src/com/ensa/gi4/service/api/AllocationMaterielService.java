@@ -4,5 +4,7 @@ import com.ensa.gi4.modele.Materiel;
 
 public interface AllocationMaterielService {
 
-    void allouerMateriel();
+    void allouerMateriel(int id);
+    void rendreMateriel(int id);
+    void listerAllocation();
 }

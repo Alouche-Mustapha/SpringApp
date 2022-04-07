@@ -16,31 +16,22 @@ public class GestionLivreServiceImpl implements GestionLivreService {
     }
 
     @Override
-    public void listerMateriel() {
-
-    }
-
-    @Override
     public void ajouterMateriel() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("ID : ");
         int id = scanner.nextInt();
-        System.out.print("Nom : ");
-        String nom = scanner.next();
-        System.out.print("NbrPage : ");
-        int nbrPage = scanner.nextInt();
-        Materiel materiel = new Livre(id, nom, nbrPage);
-        this.materielDAO.ajouterMateriel(materiel);
-        System.out.println("Le livre est bien ajoute");
-    }
-
-    @Override
-    public void supprimerMateriel(int id) {
-
-    }
-
-    @Override
-    public void chercherMateriel(int id) {
+        Materiel materiel = this.materielDAO.chercherMateriel(id);
+        if (materiel == null) {
+            System.out.print("Nom : ");
+            String nom = scanner.next();
+            System.out.print("NbrPage : ");
+            int nbrPage = scanner.nextInt();
+            Materiel nouveauMateriel = new Livre(id, nom, nbrPage);
+            this.materielDAO.ajouterMateriel(nouveauMateriel);
+            System.out.println("Le livre est bien ajoute");
+        } else {
+            System.out.println("Il existe deja un materiel avec cet id");
+        }
 
     }
 
@@ -53,5 +44,20 @@ public class GestionLivreServiceImpl implements GestionLivreService {
         int nbrPage = scanner.nextInt();
         this.materielDAO.modifierMateriel(id, new Livre(id, nom, nbrPage));
         System.out.println("Le livre est bien modifie");
+    }
+
+    @Override
+    public void listerMateriel() {
+
+    }
+
+    @Override
+    public void supprimerMateriel(int id) {
+
+    }
+
+    @Override
+    public void chercherMateriel(int id) {
+
     }
 }

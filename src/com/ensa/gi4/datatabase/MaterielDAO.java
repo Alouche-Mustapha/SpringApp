@@ -7,6 +7,7 @@ import java.util.*;
 public class MaterielDAO {
 
     private List<Materiel> materiels = new ArrayList<>();
+    private List<Materiel> allocations = new ArrayList<>();
 
     public List<Materiel> listerMateriels() {
         return this.materiels;
@@ -36,5 +37,28 @@ public class MaterielDAO {
                 this.materiels.remove(materiel);
             }
         }
+    }
+
+    public List<Materiel> listerAllocations() {
+        return this.allocations;
+    }
+
+    public void allouerMateriel(Materiel materiel) {
+        this.allocations.add(materiel);
+        this.materiels.remove(materiel);
+    }
+
+    public void rendreMateriel(Materiel materiel) {
+        this.allocations.remove(materiel);
+        this.materiels.add(materiel);
+    }
+
+    public Materiel chercherAllocation(int id) {
+        for (Materiel materiel : this.allocations) {
+            if (materiel.getId() == id) {
+                return materiel;
+            }
+        }
+        return null;
     }
 }

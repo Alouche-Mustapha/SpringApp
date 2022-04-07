@@ -21,13 +21,18 @@ public class GestionMaterielController {
     }
 
     public void afficherMenu() {
-        System.out.println("1- pour lister les materiels, entrer 1");
-        System.out.println("2- pour ajouter un nouveau materiel, entrer 2");
-        System.out.println("3- pour supprimer un materiel, entrer 3");
-        System.out.println("4- pour modifier un materiel, entrer 4");
-        System.out.println("5- pour chercher un materiel, entrer 5");
-        System.out.println("6- pour allouer un materiel, entrer 6");
+        System.out.println("\n******************************************");
+        System.out.println("1- pour lister les materiels,    entrer 1");
+        System.out.println("2- pour lister les allocations,  entrer 2");
+        System.out.println("3- pour ajouter un materiel,     entrer 3");
+        System.out.println("4- pour supprimer un materiel,   entrer 4");
+        System.out.println("5- pour modifier un materiel,    entrer 5");
+        System.out.println("6- pour chercher un materiel,    entrer 6");
+        System.out.println("7- pour allouer un materiel,     entrer 7");
+        System.out.println("8- pour rendre un materiel,      entrer 8");
         System.out.println("0- pour sortir de l'application, entrer 0");
+        System.out.println("******************************************\n");
+        System.out.print("option : ");
         Scanner scanner = new Scanner(System.in);
         String next = scanner.next();
         if ("0".equals(next)) {
@@ -35,15 +40,19 @@ public class GestionMaterielController {
         } else if ("1".equals(next)) {
             listerMateriel();
         } else if ("2".equals(next)) {
-            ajouterMateriel();
+            listerAllocations();
         } else if ("3".equals(next)) {
-            supprimerMateriel();
+            ajouterMateriel();
         } else if ("4".equals(next)) {
-            modifierMateriel();
+            supprimerMateriel();
         } else if ("5".equals(next)) {
-            chercherMateriel();
+            modifierMateriel();
         } else if ("6".equals(next)) {
+            chercherMateriel();
+        } else if ("7".equals(next)) {
             allouerMateriel();
+        } else if ("8".equals(next)) {
+            rendreMateriel();
         } else {
             System.out.println("choix invalide");
         }
@@ -82,7 +91,21 @@ public class GestionMaterielController {
         this.gestionMaterielService.chercherMateriel(id);
     }
 
+    public void listerAllocations() {
+        this.allocationMaterielService.listerAllocation();
+    }
+
     public void allouerMateriel() {
-        allocationMaterielService.allouerMateriel();
+        System.out.print("Entre un id : ");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        this.allocationMaterielService.allouerMateriel(id);
+    }
+
+    public void rendreMateriel() {
+        System.out.print("Entre un id : ");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        this.allocationMaterielService.rendreMateriel(id);
     }
 }

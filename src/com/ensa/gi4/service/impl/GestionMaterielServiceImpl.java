@@ -44,6 +44,7 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
     public void ajouterMateriel() {
         System.out.println("Pour ajouter un livre taper 1 : ");
         System.out.println("Pour ajouter une chaise taper 2 : ");
+        System.out.print("Choix : ");
         Scanner scanner = new Scanner(System.in);
         String choix = scanner.next();
         if ("1".equals(choix)) {
@@ -62,16 +63,17 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
             System.out.println("Pas de materiel avec cet id");
         } else {
             this.materielDAO.supprimerMateriel(id);
-            System.out.println("Materiel bien supprimer");
+            System.out.println("Le materiel " + materiel.getName() + " est supprime");
         }
     }
 
     @Override
     public void chercherMateriel(int id) {
-        if (this.materielDAO.chercherMateriel(id) == null) {
+        Materiel materiel = this.materielDAO.chercherMateriel(id);
+        if (materiel == null) {
             System.out.println("Pas de materiel avec cet id");
         } else {
-            System.out.println("Le materiel " + this.materielDAO.chercherMateriel(id).getName() + " est bien trouver");
+            System.out.println("Le materiel " + materiel + " est bien trouver");
         }
     }
 

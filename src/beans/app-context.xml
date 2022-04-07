@@ -20,7 +20,9 @@
         <constructor-arg ref="gestionLivreService"/>
     </bean>
 
-    <bean id="allocationMaterielService" class="com.ensa.gi4.service.impl.AllocationMaterielServiceImpl"/>
+    <bean id="allocationMaterielService" class="com.ensa.gi4.service.impl.AllocationMaterielServiceImpl">
+        <constructor-arg ref="materielDAO"/>
+    </bean>
 
     <bean id="gestionMaterielController" class="com.ensa.gi4.controller.GestionMaterielController">
         <property name="gestionMaterielService" ref="gestionMaterielService"/>

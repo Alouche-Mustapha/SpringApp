@@ -4,21 +4,30 @@ import com.ensa.gi4.modele.Livre;
 import com.ensa.gi4.modele.Materiel;
 import com.ensa.gi4.service.api.AllocationMaterielService;
 import com.ensa.gi4.service.api.GestionMaterielService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component("appController")
 public class GestionMaterielController {
 
+    @Autowired
+    @Qualifier("mainService")
     private GestionMaterielService gestionMaterielService;
+
+    @Autowired
+    @Qualifier("allocationService")
     private AllocationMaterielService allocationMaterielService;
 
-    public void setGestionMaterielService(GestionMaterielService gestionMaterielService) {
-        this.gestionMaterielService = gestionMaterielService;
-    }
-
-    public void setAllocationMaterielService(AllocationMaterielService allocationMaterielService) {
-        this.allocationMaterielService = allocationMaterielService;
-    }
+//    public void setGestionMaterielService(GestionMaterielService gestionMaterielService) {
+//        this.gestionMaterielService = gestionMaterielService;
+//    }
+//
+//    public void setAllocationMaterielService(AllocationMaterielService allocationMaterielService) {
+//        this.allocationMaterielService = allocationMaterielService;
+//    }
 
     public void afficherMenu() {
         System.out.println("\n******************************************");

@@ -4,16 +4,23 @@ import com.ensa.gi4.datatabase.MaterielDAO;
 import com.ensa.gi4.modele.Livre;
 import com.ensa.gi4.modele.Materiel;
 import com.ensa.gi4.service.api.GestionLivreService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class GestionLivreServiceImpl implements GestionLivreService {
 
+    @Autowired
     MaterielDAO materielDAO;
 
-    public GestionLivreServiceImpl(MaterielDAO materielDAO) {
-        this.materielDAO = materielDAO;
+    public GestionLivreServiceImpl() {
     }
+
+//    public GestionLivreServiceImpl(MaterielDAO materielDAO) {
+//        this.materielDAO = materielDAO;
+//    }
 
     @Override
     public void ajouterMateriel() {

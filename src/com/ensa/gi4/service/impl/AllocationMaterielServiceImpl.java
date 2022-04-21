@@ -5,16 +5,23 @@ import com.ensa.gi4.modele.Chaise;
 import com.ensa.gi4.modele.Livre;
 import com.ensa.gi4.modele.Materiel;
 import com.ensa.gi4.service.api.AllocationMaterielService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component("allocationService")
 public class AllocationMaterielServiceImpl implements AllocationMaterielService {
 
+    @Autowired
     MaterielDAO materielDAO;
 
-    public AllocationMaterielServiceImpl(MaterielDAO materielDAO) {
-        this.materielDAO = materielDAO;
+    public AllocationMaterielServiceImpl() {
     }
+
+//    public AllocationMaterielServiceImpl(MaterielDAO materielDAO) {
+//        this.materielDAO = materielDAO;
+//    }
 
     @Override
     public void allouerMateriel(int id) {

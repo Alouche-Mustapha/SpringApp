@@ -7,21 +7,32 @@ import com.ensa.gi4.modele.Materiel;
 import com.ensa.gi4.service.api.GestionChaiseService;
 import com.ensa.gi4.service.api.GestionLivreService;
 import com.ensa.gi4.service.api.GestionMaterielService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Scanner;
 
+@Component("mainService")
 public class GestionMaterielServiceImpl implements GestionMaterielService {
 
+    @Autowired
     MaterielDAO materielDAO;
+
+    @Autowired
     GestionLivreService gestionLivreService;
+
+    @Autowired
     GestionChaiseService gestionChaiseService;
 
-    public GestionMaterielServiceImpl(MaterielDAO materielDAO, GestionLivreService gestionLivreService, GestionChaiseService gestionChaiseService) {
-        this.materielDAO = materielDAO;
-        this.gestionLivreService = gestionLivreService;
-        this.gestionChaiseService = gestionChaiseService;
+    public GestionMaterielServiceImpl() {
     }
+
+//    public GestionMaterielServiceImpl(MaterielDAO materielDAO, GestionLivreService gestionLivreService, GestionChaiseService gestionChaiseService) {
+//        this.materielDAO = materielDAO;
+//        this.gestionLivreService = gestionLivreService;
+//        this.gestionChaiseService = gestionChaiseService;
+//    }
 
     @Override
     public void listerMateriel() {
@@ -73,7 +84,7 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
         if (materiel == null) {
             System.out.println("Pas de materiel avec cet id");
         } else {
-            System.out.println("Le materiel " + materiel + " est bien trouve");
+            System.out.println("Le materiel " + materiel.getName() + " est bien trouve");
         }
     }
 

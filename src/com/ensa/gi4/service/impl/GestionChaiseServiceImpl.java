@@ -3,16 +3,23 @@ package com.ensa.gi4.service.impl;
 import com.ensa.gi4.datatabase.MaterielDAO;
 import com.ensa.gi4.modele.Chaise;
 import com.ensa.gi4.service.api.GestionChaiseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class GestionChaiseServiceImpl implements GestionChaiseService {
 
+    @Autowired
     MaterielDAO materielDAO;
 
-    public GestionChaiseServiceImpl(MaterielDAO materielDAO) {
-        this.materielDAO = materielDAO;
+    public GestionChaiseServiceImpl() {
     }
+
+//    public GestionChaiseServiceImpl(MaterielDAO materielDAO) {
+//        this.materielDAO = materielDAO;
+//    }
 
     @Override
     public void ajouterMateriel() {

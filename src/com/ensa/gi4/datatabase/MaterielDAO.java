@@ -1,13 +1,17 @@
 package com.ensa.gi4.datatabase;
 
 import com.ensa.gi4.modele.Materiel;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 public class MaterielDAO {
 
     private List<Materiel> materiels = new ArrayList<>();
     private List<Materiel> allocations = new ArrayList<>();
+
+    public MaterielDAO() { }
 
     public List<Materiel> listerMateriels() {
         return this.materiels;

@@ -1,6 +1,9 @@
 package com.ensa.gi4.service.impl;
 
 import com.ensa.gi4.datatabase.MaterielDAO;
+import com.ensa.gi4.listeners.AppEvent;
+import com.ensa.gi4.listeners.ApplicationPublisher;
+import com.ensa.gi4.listeners.EventType;
 import com.ensa.gi4.modele.Chaise;
 import com.ensa.gi4.modele.Livre;
 import com.ensa.gi4.modele.Materiel;
@@ -25,6 +28,9 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
     @Autowired
     GestionChaiseService gestionChaiseService;
 
+    @Autowired
+    ApplicationPublisher applicationPublisher;
+
     public GestionMaterielServiceImpl() {
     }
 
@@ -42,11 +48,7 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
         } else {
             System.out.println("La liste des materiels :");
             for (Materiel materiel : materiels) {
-                if (materiel instanceof Livre) {
-                    System.out.println("ID : " + materiel.getId() + " , Nom : " + materiel.getName() + " ,NbrPage : " + ((Livre) materiel).getNbrPage());
-                } else if (materiel instanceof Chaise){
-                    System.out.println("ID : " + materiel.getId() + " , Nom : " + materiel.getName() + " ,Marque : " + ((Chaise) materiel).getMarque());
-                }
+                applicationPublisher.publish(new AppEvent<Materiel>(materiel, EventType.GET));
             }
         }
     }
@@ -74,17 +76,7 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
             System.out.println("Pas de materiel avec cet id");
         } else {
             this.materielDAO.supprimerMateriel(id);
-            System.out.println("Le materiel " + materiel.getName() + " est supprime");
-        }
-    }
-
-    @Override
-    public void chercherMateriel(int id) {
-        Materiel materiel = this.materielDAO.chercherMateriel(id);
-        if (materiel == null) {
-            System.out.println("Pas de materiel avec cet id");
-        } else {
-            System.out.println("Le materiel " + materiel.getName() + " est bien trouve");
+            applicationPublisher.publish(new AppEvent<Materiel>(materiel, EventType.REMOVE));
         }
     }
 
@@ -99,6 +91,16 @@ public class GestionMaterielServiceImpl implements GestionMaterielService {
             } else if (materiel instanceof Chaise){
                 this.gestionChaiseService.modifierMateriel(id);
             }
+        }
+    }
+
+    @Override
+    public void chercherMateriel(int id) {
+        Materiel materiel = this.materielDAO.chercherMateriel(id);
+        if (materiel == null) {
+            System.out.println("Pas de materiel avec cet id");
+        } else {
+            applicationPublisher.publish(new AppEvent<Materiel>(materiel, EventType.FIND));
         }
     }
 }

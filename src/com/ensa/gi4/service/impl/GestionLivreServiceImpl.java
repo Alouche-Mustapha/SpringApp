@@ -1,6 +1,9 @@
 package com.ensa.gi4.service.impl;
 
 import com.ensa.gi4.datatabase.MaterielDAO;
+import com.ensa.gi4.listeners.AppEvent;
+import com.ensa.gi4.listeners.ApplicationPublisher;
+import com.ensa.gi4.listeners.EventType;
 import com.ensa.gi4.modele.Livre;
 import com.ensa.gi4.modele.Materiel;
 import com.ensa.gi4.service.api.GestionLivreService;
@@ -14,6 +17,9 @@ public class GestionLivreServiceImpl implements GestionLivreService {
 
     @Autowired
     MaterielDAO materielDAO;
+
+    @Autowired
+    ApplicationPublisher applicationPublisher;
 
     public GestionLivreServiceImpl() {
     }
@@ -35,11 +41,10 @@ public class GestionLivreServiceImpl implements GestionLivreService {
             int nbrPage = scanner.nextInt();
             Materiel nouveauMateriel = new Livre(id, nom, nbrPage);
             this.materielDAO.ajouterMateriel(nouveauMateriel);
-            System.out.println("Le livre est bien ajoute");
+            applicationPublisher.publish(new AppEvent<Materiel>(nouveauMateriel, EventType.ADD));
         } else {
             System.out.println("Il existe deja un materiel avec cet id");
         }
-
     }
 
     @Override
@@ -50,7 +55,7 @@ public class GestionLivreServiceImpl implements GestionLivreService {
         System.out.print("Nbr page : ");
         int nbrPage = scanner.nextInt();
         this.materielDAO.modifierMateriel(id, new Livre(id, nom, nbrPage));
-        System.out.println("Le livre est bien modifie");
+        applicationPublisher.publish(new AppEvent<Materiel>(this.materielDAO.chercherMateriel(id), EventType.UPDATE));
     }
 
     @Override

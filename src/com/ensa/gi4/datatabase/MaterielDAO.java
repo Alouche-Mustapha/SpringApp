@@ -21,6 +21,10 @@ public class MaterielDAO {
         this.materiels.add(materiel);
     }
 
+    public void supprimerMateriel(int id) {
+        this.materiels.removeIf(materiel -> materiel.getId() == id);
+    }
+
     public Materiel chercherMateriel(int id) {
         for (Materiel materiel : this.materiels) {
             if (materiel.getId() == id) {
@@ -28,10 +32,6 @@ public class MaterielDAO {
             }
         }
         return null;
-    }
-
-    public void supprimerMateriel(int id) {
-        this.materiels.removeIf(materiel -> materiel.getId() == id);
     }
 
     public void modifierMateriel(int id, Materiel nouveauMateriel) {

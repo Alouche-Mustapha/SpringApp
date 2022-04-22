@@ -72,7 +72,11 @@ public class GestionMaterielController {
     }
 
     public void listerMateriel() {
-        gestionMaterielService.listerMateriel();
+        this.gestionMaterielService.listerMateriel();
+    }
+
+    public void listerAllocations() {
+        this.allocationMaterielService.listerAllocation();
     }
 
     public void ajouterMateriel() {
@@ -98,10 +102,6 @@ public class GestionMaterielController {
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
         this.gestionMaterielService.chercherMateriel(id);
-    }
-
-    public void listerAllocations() {
-        this.allocationMaterielService.listerAllocation();
     }
 
     public void allouerMateriel() {

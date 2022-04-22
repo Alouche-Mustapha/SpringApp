@@ -1,6 +1,9 @@
 package com.ensa.gi4.service.impl;
 
 import com.ensa.gi4.datatabase.MaterielDAO;
+import com.ensa.gi4.listeners.AppEvent;
+import com.ensa.gi4.listeners.ApplicationPublisher;
+import com.ensa.gi4.listeners.EventType;
 import com.ensa.gi4.modele.Chaise;
 import com.ensa.gi4.modele.Livre;
 import com.ensa.gi4.modele.Materiel;
@@ -16,6 +19,9 @@ public class AllocationMaterielServiceImpl implements AllocationMaterielService 
     @Autowired
     MaterielDAO materielDAO;
 
+    @Autowired
+    ApplicationPublisher applicationPublisher;
+
     public AllocationMaterielServiceImpl() {
     }
 
@@ -24,13 +30,26 @@ public class AllocationMaterielServiceImpl implements AllocationMaterielService 
 //    }
 
     @Override
+    public void listerAllocation() {
+        List<Materiel> allocations = this.materielDAO.listerAllocations();
+        if (allocations.size() == 0) {
+            System.out.println("La liste des allocations est vide");
+        } else {
+            System.out.println("La liste des allocation :");
+            for (Materiel materiel : allocations) {
+                this.applicationPublisher.publish(new AppEvent<Materiel>(materiel, EventType.GET));
+            }
+        }
+    }
+
+    @Override
     public void allouerMateriel(int id) {
         Materiel materiel = this.materielDAO.chercherMateriel(id);
         if (materiel == null) {
             System.out.println("Pas de materiel avec cet id");
         } else {
             this.materielDAO.allouerMateriel(materiel);
-            System.out.println("Materiel " + materiel.getName() + " est bien alloue");
+            applicationPublisher.publish(new AppEvent<Materiel>(materiel, EventType.ALLOCATE));
         }
     }
 
@@ -41,24 +60,7 @@ public class AllocationMaterielServiceImpl implements AllocationMaterielService 
             System.out.println("Pas de materiel avec cet id");
         } else {
             this.materielDAO.rendreMateriel(materiel);
-            System.out.println("Materiel " + materiel.getName() + " est bien rendu");
-        }
-    }
-
-    @Override
-    public void listerAllocation() {
-        List<Materiel> allocations = this.materielDAO.listerAllocations();
-        if (allocations.size() == 0) {
-            System.out.println("La liste des allocations est vide");
-        } else {
-            System.out.println("La liste des allocation :");
-            for (Materiel materiel : allocations) {
-                if (materiel instanceof Livre) {
-                    System.out.println("ID : " + materiel.getId() + " , Nom : " + materiel.getName() + " ,NbrPage : " + ((Livre) materiel).getNbrPage());
-                } else if (materiel instanceof Chaise){
-                    System.out.println("ID : " + materiel.getId() + " , Nom : " + materiel.getName() + " ,Marque : " + ((Chaise) materiel).getMarque());
-                }
-            }
+            applicationPublisher.publish(new AppEvent<Materiel>(materiel, EventType.RETURN));
         }
     }
 }
